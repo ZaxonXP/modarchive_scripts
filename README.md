@@ -4,7 +4,7 @@ Playback for https://modarchive.org music modules.
 # Intro
 - The collection of Modarchive.org modules can be played using playlists directly from the server.
 - Possition of the playback is remembered, so it can be continued from the last listened music module.
-- User can define which playlist it will listen to (selectable by fzf menu)
+- User can define which playlist will listen to (selectable by fzf menu)
 
 # Purpose of the scripts:
 - menu_modules.sh - for binding to some key shortcut. Runs st terminal with the `menu_modarchive.sh` script.
