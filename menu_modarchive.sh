@@ -14,14 +14,20 @@ n=12 qu[$n]=69004;      req[$n]="view_artist_modules";     lab[$n]="Elwood"
 n=13 qu[$n]=92000;      req[$n]="view_artist_modules";     lab[$n]="Atekuro"
 
 #################################################
+get_posfile() {
+    local label=$1
+    local posfile=${label// /_}
+    posfile=${posfile,,}
+    posfile="$(dirname $0)/modarchive_${posfile}.last"
+    echo $posfile
+}
+#################################################
 IFS=$'\n'
-sel=$(for (( i=1; i <= ${#lab[*]}; i++ )); do
-    echo "$i - ${lab[$i]}"
+sel=$(for (( i=1; i <= $(( ${#lab[*]} + 1 )); i++ )); do
+    [ -n "${lab[$i]}" ] && echo "$i - ${lab[$i]}"
 done | fzf --reverse --height=100 | awk '{print $1}')
 
-posfile=${lab[$sel]// /_}
-posfile=${posfile,,}
-posfile="$(dirname $0)/modarchive_${posfile}.last"
+posfile=$( get_posfile ${lab[$i]} )
 request=${req[$sel]}
 artist=${qu[$sel]}
 
