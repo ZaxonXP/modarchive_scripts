@@ -27,7 +27,7 @@ sel=$(for (( i=1; i <= $(( ${#lab[*]} + 1 )); i++ )); do
     [ -n "${lab[$i]}" ] && echo "$i - ${lab[$i]}"
 done | fzf --reverse --height=100 | awk '{print $1}')
 
-posfile=$( get_posfile ${lab[$i]} )
+posfile=$( get_posfile ${lab[$sel]} )
 request=${req[$sel]}
 artist=${qu[$sel]}
 
