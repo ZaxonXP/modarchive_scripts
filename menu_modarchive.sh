@@ -12,23 +12,24 @@ n=10 qu[$n]=69553;      req[$n]="view_artist_modules";     lab[$n]="Awesome"
 n=11 qu[$n]=69008;      req[$n]="view_artist_modules";     lab[$n]="xtd"
 n=12 qu[$n]=69004;      req[$n]="view_artist_modules";     lab[$n]="Elwood"
 n=13 qu[$n]=92000;      req[$n]="view_artist_modules";     lab[$n]="Atekuro"
+n=14 qu[$n]=00000;      req[$n]="view_chart";              lab[$n]="_My Favourites"
 
-#################################################
-get_posfile() {
-    local label=$1
-    local posfile=${label// /_}
-    posfile=${posfile,,}
-    posfile="$(dirname $0)/modarchive_${posfile}.last"
-    echo $posfile
-}
 #################################################
 IFS=$'\n'
 sel=$(for (( i=1; i <= $(( ${#lab[*]} + 1 )); i++ )); do
     [ -n "${lab[$i]}" ] && echo "$i - ${lab[$i]}"
 done | fzf --reverse --height=100 | awk '{print $1}')
 
-posfile=$( get_posfile ${lab[$sel]} )
+pos=${lab[$sel]}
+pos=${pos,,}
+pos=${pos// /_}
 request=${req[$sel]}
 artist=${qu[$sel]}
 
-[ -n "$sel" ] && modarchive_play_from_web.sh $request $artist $posfile
+[ -z "$sel" ] && exit 0
+
+if [ "$1" == "-g" ]; then
+     modarchive_play_from_web.sh -g $request $artist $pos
+else
+     modarchive_play_from_web.sh $request $artist $pos
+fi
