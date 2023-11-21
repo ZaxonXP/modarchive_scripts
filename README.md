@@ -5,12 +5,17 @@ Playback for https://modarchive.org music modules.
 - The collection of Modarchive.org modules can be played using playlists directly from the server.
 - Possition of the playback is remembered, so it can be continued from the last listened music module.
 - User can define which playlist will listen to (selectable by fzf menu)
+- For each playlist additional playlist are created (fav.txt and rej.txt). Using additional script (menu_modules_my_favorite.sh) user can decide which modules will be Favorite and which Rejected.
+- User later on can play only Favorites, Rejected or normal list.
+- All the list is taken from the modarchive.org and stored locally in the paged txt files, so it is like a snapshot in time.
 
 # Purpose of the scripts:
 - menu_modules.sh - for binding to some key shortcut. Runs st terminal with the `menu_modarchive.sh` script.
 - menu_modarchive.sh - contains a definition of playlist and runs the playback script
 - modarchive_play_from_web.sh - play user specified playlist
 - mpt_control.sh - allows remote control of the OpenMPT123 module player (can be mapped to play/next/previous media keys)
+- menu_modules_my_favorite.sh - script for choosing where the currently played module should be placed (fav.txt or rej.txt)
+- modarchive.conf - configuration file.
 
 # Dependencies:
 - Bash
